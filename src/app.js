@@ -2,6 +2,26 @@ const express = require("express");
 
 const app = express();
 
+const { adminAuth, userAuth } = require("./middlewares/auth");
+
+app.use("/admin", adminAuth);
+
+app.use("/user", userAuth, (req, res) => {
+  res.send("invalid login");
+});
+
+// app.use("/admin", (req, res) => {
+//   res.send("This is admin data");
+// });
+
+app.use("/admin/getAlldata", (req, res) => {
+  res.send("get all data of the users");
+});
+
+app.use("/admin/deletedata", (req, res) => {
+  res.send("deleted data");
+});
+
 app.use("/", (req, res, next) => {
   console.log("/response");
   // res.send("/response");
