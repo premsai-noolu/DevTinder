@@ -2,108 +2,25 @@ const express = require("express");
 
 const app = express();
 
-const { adminAuth, userAuth } = require("./middlewares/auth");
-
-app.use("/admin", adminAuth);
-
-app.use("/user", userAuth, (req, res) => {
-  res.send("invalid login");
-});
-
-// app.use("/admin", (req, res) => {
-//   res.send("This is admin data");
-// });
-
-app.use("/admin/getAlldata", (req, res) => {
-  res.send("get all data of the users");
-});
-
-app.use("/admin/deletedata", (req, res) => {
-  res.send("deleted data");
-});
-
-app.use("/", (req, res, next) => {
-  console.log("/response");
-  // res.send("/response");
-  next();
-});
-
-app.use("/greet", (req, res) => {
-  console.log("greet function");
-  res.send("greet response");
-});
-
-app.use(
-  "/user",
-  (req, res, next) => {
-    console.log("This is first user response");
-    // res.send(" first user response");
-    next();
-  },
-  (req, res, next) => {
-    console.log("This is second user response");
-    res.send("second user response");
+app.get("/getuserdata", (req, res) => {
+  try {
+    throw new err("thos is a error");
+    res.send("helloooooooooooooooooooooo");
+  } catch (err) {
+    res.status(500).send("something went wrong");
   }
-);
+});
 
-// app.use(
-//   "/user",
-//   (req, res, next) => {
-//     console.log("This is first response");
-//     // res.send("Response!!");
-//     next();
-//   },
-//   (req, res, next) => {
-//     console.log("This is second response");
-//     // res.send("2nd response!!");
-//     next();
-//   },
-//   (req, res) => {
-//     console.log("This is third response");
-//     res.send("3rd response!!");
-//   },
-//   (req, res) => {
-//     console.log("This is fourth response");
-//     res.send("4th response!!");
-//   }
-// );
+app.get("/getdata", (req, res) => {
+  throw new err("thos is a error");
+  res.send("helloooooooooooooooooooooo");
+});
 
-// app.use("/greet", (req, res) => {
-//   res.send("Namaste Prem");
-// });
-
-// app.use("/user", (req, res) => {
-//   res.send("Hahahahaha");
-// });
-
-// app.get("/user", (req, res) => {
-//   res.send({ firstname: "prem", lastname: "noolu" });
-// });
-
-// app.post("/user", (req, res) => {
-//   //Data saved to DB
-//   res.send("Data successfully saved to DB");
-// });
-
-// app.delete("/user", (req, res) => {
-//   res.send("Data deleted from DB");
-// });
-
-// app.use("/hello/123", (req, res) => {
-//   res.send("hello hello123");
-// });
-
-// app.use("/hello", (req, res) => {
-//   res.send("Hello hello hello");
-// });
-
-// app.use("/test", (req, res) => {
-//   res.send("hello world test");
-// });
-
-// app.use((req, res) => {
-//   res.send("hello world 1");
-// });
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("something went wrong hoo");
+  }
+});
 
 app.listen(9999, () => {
   console.log("server is running on 9999");
