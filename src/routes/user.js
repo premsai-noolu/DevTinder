@@ -20,7 +20,13 @@ userRouter.get("/user/requests/recieved", userAuth, async (req, res) => {
     const connectionRequests = await ConnectionRequestModel.find({
       toUserId: loggedInUser._id,
       status: "interested",
-    }).populate("fromUserId", ["firstName", "lastName", "about", "skills"]);
+    }).populate("fromUserId", [
+      "firstName",
+      "lastName",
+      "about",
+      "skills",
+      "photoUrl",
+    ]);
     if (!connectionRequests) {
       throw new Error("no interested connections");
     }

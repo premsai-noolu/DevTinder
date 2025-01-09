@@ -44,14 +44,19 @@ const userSchema = new Schema(
     gender: {
       type: String,
       validate(value) {
-        if (!["male", "female", "others"].includes(value)) {
+        if (
+          !["male", "female", "Male", "Female", "M", "F", "others"].includes(
+            value
+          )
+        ) {
           throw new Error("gender is not valid");
         }
       },
     },
     photoUrl: {
       type: String,
-      default: "https://lofrev.net/user-logo-pictures/",
+      default:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn51eLmhvH8fweezRtylnpFVoV26W5YacssA&s",
       validate(value) {
         if (!validator.isURL(value)) {
           throw new Error("Url must be valid one");
