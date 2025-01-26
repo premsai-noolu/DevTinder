@@ -28,7 +28,7 @@ app.use("/", userRouter);
 connectDB()
   .then(() => {
     console.log("databse connection established");
-    app.listen(9999, () => {
+    app.listen(process.env.PORT, () => {
       console.log("server is running on 9999");
     });
   })
