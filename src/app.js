@@ -4,6 +4,9 @@ const app = express();
 const { connectDB } = require("./config/database");
 const cors = require("cors");
 require("dotenv").config();
+require("node-cron");
+require("date-fns");
+require("./utils/cronjob");
 
 app.use(
   cors({
