@@ -8,7 +8,6 @@ console.log("cron job scheduled");
 //this job will run at 8 AM in the morning.
 cron.schedule("0 8 * * *", async () => {
   try {
-    console.log("scheduled cron job");
     const yesterday = subDays(new Date(), 1);
     const yesterdayStart = startOfDay(yesterday);
     const yesterdayEnd = endOfDay(yesterday);
@@ -24,14 +23,13 @@ cron.schedule("0 8 * * *", async () => {
     const listOfEmails = [
       ...new Set(pendingRequests.map((req) => req.toUserId.emailId)),
     ];
-    console.log(listOfEmails);
+
     for (const email of listOfEmails) {
       try {
         const res = await sendEmail.run(
           "New friend requests pending for " + email,
           "There are so many friend requests pending. Please login to the devtinder.live platform to accept or reject the requests."
         );
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
