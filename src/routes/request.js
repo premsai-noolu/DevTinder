@@ -68,6 +68,7 @@ requestRouter.post(
           "A new friend request " + req.user.firstName,
           req.user.firstName + " is " + status + " in " + toUser.firstName
         );
+        console.log(emailRes);
       } catch (err) {}
 
       res.json({
